@@ -12,6 +12,10 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # Localization and language
+  flutter_localizations:
+    sdk: flutter
+
   # Icons
   cupertino_icons: ^1.0.0
   # Routes, Dependence Injection
@@ -32,3 +36,5 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
+  assets:
+    - lang/
