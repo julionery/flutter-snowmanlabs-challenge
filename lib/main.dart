@@ -1,29 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+
+import 'app/app_module.dart';
 
 void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Perguntas Frequentes',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text(
-            "Perguntas Frequentes",
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-        ),
-        body: Container(),
-      ),
-    );
-  }
+  runApp(ModularApp(
+    module: AppModule(),
+  ));
 }
