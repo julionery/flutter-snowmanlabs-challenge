@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../interfaces/theme_app_interface.dart';
 import 'app_theme_dark.dart';
 import 'app_theme_light.dart';
-import '../../interfaces/theme_app_interface.dart';
 
 class AppThemeFactory {
   static IThemeAppInterface getTheme(ThemeMode themeMode) {

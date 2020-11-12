@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../consts/colors_const.dart';
 import '../../interfaces/theme_app_interface.dart';
+import '../consts/colors_const.dart';
 
 class AppThemeLight implements IThemeAppInterface {
   @override
