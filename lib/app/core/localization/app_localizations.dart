@@ -47,8 +47,8 @@ class AppLocalizations {
     }
 
     if (params != null) {
-      params.forEach((chave, valor) {
-        value = value.replaceAll('{{$chave}}', valor);
+      params.forEach((forKey, forValue) {
+        value = value.replaceAll('{{$forKey}}', forValue);
       });
     }
 
