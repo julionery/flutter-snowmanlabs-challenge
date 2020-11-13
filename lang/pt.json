@@ -1,5 +1,6 @@
 {
   "home":{
-    "title": "Perguntas Frequentes"
+    "title": "Perguntas Frequentes",
+    "add_button": "Adicionar Pergunta"
   }
 }

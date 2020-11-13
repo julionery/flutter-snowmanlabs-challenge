@@ -7,13 +7,24 @@ class AppThemeLight implements IThemeAppInterface {
   @override
   ThemeData getTheme() {
     return ThemeData(
-      primaryColor: ColorsConst().mainColor(1),
       visualDensity: VisualDensity.adaptivePlatformDensity,
+      primaryColor: ColorsConst().mainColor(1),
+      buttonTheme: ButtonThemeData(
+        buttonColor: ColorsConst().secondaryColor(1),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(10.0),
+          ),
+        ),
+      ),
       brightness: Brightness.light,
       accentColor: ColorsConst().mainColor(1),
-      floatingActionButtonTheme: FloatingActionButtonThemeData(
-          backgroundColor: ColorsConst().mainColor(1),
-          foregroundColor: Colors.white),
+      appBarTheme: const AppBarTheme(
+        elevation: 0,
+        centerTitle: true,
+        textTheme: TextTheme(
+            headline6: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+      ),
     );
   }
 
