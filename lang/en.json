@@ -1,6 +1,9 @@
 {
-  "home":{
+  "home": {
     "title": "Frequently Asked",
     "add_button": "Add question"
+  },
+  "search_dialog": {
+    "hint": "Search questions"
   }
 }

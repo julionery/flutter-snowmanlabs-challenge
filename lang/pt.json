@@ -2,5 +2,8 @@
   "home":{
     "title": "Perguntas Frequentes",
     "add_button": "Adicionar Pergunta"
+  },
+  "search_dialog": {
+    "hint": "Procurar perguntas"
   }
 }

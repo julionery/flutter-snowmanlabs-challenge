@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:snowmanlabs_challenge/app/widgets/search_dialog.dart';
 
 import '../../core/consts/theme_const.dart';
 import '../../core/localization/app_translate.dart';
@@ -10,6 +11,8 @@ import 'components/question_tile.dart';
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    const String search = "";
+
     return Scaffold(
       appBar: AppBar(
         shape: ThemeConst.roundedRectangleBorder,
@@ -21,7 +24,9 @@ class HomeScreen extends StatelessWidget {
             icon: const Icon(
               Icons.search,
             ),
-            onPressed: () {},
+            onPressed: () async {
+              await _showDialogSearch(context, search);
+            },
           ),
         ],
       ),
@@ -45,5 +50,13 @@ class HomeScreen extends StatelessWidget {
             );
           }),
     );
+  }
+
+  Future _showDialogSearch(BuildContext context, String valueSearch) async {
+    final search = await showDialog<String>(
+        context: context, builder: (_) => SearchDialog(valueSearch));
+    if (search != null) {
+      valueSearch = search;
+    }
   }
 }
