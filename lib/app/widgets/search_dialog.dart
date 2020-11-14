@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 
+import '../core/consts/colors_const.dart';
 import '../core/consts/theme_const.dart';
 import '../core/localization/app_translate.dart';
 
@@ -11,7 +13,7 @@ class SearchDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const itemColor = Colors.white;
+    const itemColor = Colors.white70;
 
     return Stack(
       children: [
@@ -25,11 +27,11 @@ class SearchDialog extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             alignment: Alignment.center,
             child: Container(
-              decoration: const BoxDecoration(
-                  color: Color.fromRGBO(15, 19, 122, 1),
-                  borderRadius: BorderRadius.all(Radius.circular(10))),
+              decoration: BoxDecoration(
+                  color: ColorsConst().backgroundMainColor(1),
+                  borderRadius: const BorderRadius.all(Radius.circular(10))),
               child: TextFormField(
-                style: const TextStyle(color: itemColor),
+                style: const TextStyle(color: Colors.white),
                 initialValue: initialText,
                 textInputAction: TextInputAction.search,
                 autofocus: true,
@@ -39,21 +41,21 @@ class SearchDialog extends StatelessWidget {
                     hintStyle: const TextStyle(color: itemColor),
                     contentPadding: const EdgeInsets.symmetric(vertical: 15),
                     prefixIcon: const Icon(
-                      Icons.search,
+                      AntDesign.search1,
                       color: itemColor,
                     ),
                     suffixIcon: Stack(
                       alignment: Alignment.centerLeft,
                       children: [
                         const ColoredBox(
-                          color: itemColor,
+                          color: Colors.white38,
                           child: SizedBox(
                             height: 30,
-                            width: 1,
+                            width: 1.5,
                           ),
                         ),
                         IconButton(
-                          icon: const Icon(Icons.close),
+                          icon: const Icon(AntDesign.close),
                           color: itemColor,
                           onPressed: () {
                             Navigator.of(context).pop();

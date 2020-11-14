@@ -13,6 +13,11 @@ class CustomRaisedButton extends StatelessWidget {
       height: 50,
       child: RaisedButton(
         onPressed: onPressed,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(10.0),
+          ),
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -23,12 +28,11 @@ class CustomRaisedButton extends StatelessWidget {
                 style: TextStyle(
                     color: Theme.of(context).primaryColor,
                     fontWeight: FontWeight.bold,
-                    fontSize: 16),
+                    fontSize: 18),
               ),
             ),
             Icon(
               iconData,
-              size: 30,
               color: Theme.of(context).primaryColor,
             )
           ],

@@ -11,11 +11,6 @@ class AppThemeLight implements IThemeAppInterface {
       primaryColor: ColorsConst().mainColor(1),
       buttonTheme: ButtonThemeData(
         buttonColor: ColorsConst().secondaryColor(1),
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(10.0),
-          ),
-        ),
       ),
       brightness: Brightness.light,
       accentColor: ColorsConst().mainColor(1),

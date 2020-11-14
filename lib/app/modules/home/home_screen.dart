@@ -1,19 +1,32 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:snowmanlabs_challenge/app/widgets/search_dialog.dart';
+import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
+import '../../core/consts/colors_const.dart';
 import '../../core/consts/theme_const.dart';
 import '../../core/localization/app_translate.dart';
 import '../../core/utils/app_converters.dart';
+import '../../modules/home/home_controller.dart';
 import '../../widgets/custom_raised_button.dart';
+import '../../widgets/custom_snack_bars.dart';
+import '../../widgets/search_dialog.dart';
+
 import 'components/question_tile.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends ModularState<HomeScreen, HomeController> {
   @override
   Widget build(BuildContext context) {
     const String search = "";
+    final _scaffoldKey = GlobalKey<ScaffoldState>();
 
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         shape: ThemeConst.roundedRectangleBorder,
         title: Text(
@@ -22,7 +35,7 @@ class HomeScreen extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(
-              Icons.search,
+              AntDesign.search1,
             ),
             onPressed: () async {
               await _showDialogSearch(context, search);
@@ -34,8 +47,15 @@ class HomeScreen extends StatelessWidget {
         padding: const EdgeInsets.only(left: 20, right: 20, bottom: 16, top: 8),
         child: CustomRaisedButton(
           text: AppTranslate(context).text('home.add_button'),
-          iconData: Icons.add,
-          onPressed: () {},
+          iconData: FontAwesome.plus,
+          onPressed: () async {
+            final result = await controller.doAddQuestion();
+            if (result != null && result) {
+              CustomSnackBar().flushBar(
+                  context, "Pergunta adicionada com sucesso",
+                  color: ColorsConst.success, iconData: Icons.check_circle);
+            }
+          },
         ),
       ),
       body: ListView.builder(

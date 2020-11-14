@@ -3,6 +3,13 @@
     "title": "Perguntas Frequentes",
     "add_button": "Adicionar Pergunta"
   },
+  "question": {
+    "title": "Adicionar Pergunta",
+    "add_button": "Adicionar",
+    "form_title": "Título da Pergunta",
+    "form_answer": "Resposta da Pergunta",
+    "form_color": "Cor"
+  },
   "search_dialog": {
     "hint": "Procurar perguntas"
   }

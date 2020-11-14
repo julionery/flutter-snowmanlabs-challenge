@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'modules/question/question_module.dart';
 
 import 'app_controller.dart';
 import 'app_widget.dart';
@@ -26,6 +27,10 @@ class AppModule extends MainModule {
         ModularRouter(
           RoutersConst.home,
           module: HomeModule(),
+        ),
+        ModularRouter(
+          RoutersConst.question,
+          module: QuestionModule(),
         ),
       ];
 }

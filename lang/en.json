@@ -3,6 +3,13 @@
     "title": "Frequently Asked",
     "add_button": "Add question"
   },
+  "question": {
+    "title": "Add Question",
+    "add_button": "Add",
+    "form_title": "Question title",
+    "form_answer": "Question answer",
+    "form_color": "Color"
+  },
   "search_dialog": {
     "hint": "Search questions"
   }

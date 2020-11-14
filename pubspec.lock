@@ -183,11 +183,25 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.10.11"
+  flushbar:
+    dependency: "direct main"
+    description:
+      name: flushbar
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.10.4"
   flutter:
     dependency: "direct main"
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_icons:
+    dependency: "direct main"
+    description:
+      name: flutter_icons
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.0"
   flutter_localizations:
     dependency: "direct main"
     description: flutter
@@ -499,3 +513,4 @@ packages:
     version: "2.2.1"
 sdks:
   dart: ">=2.10.0 <2.11.0"
+  flutter: ">=1.5.0 <2.0.0"

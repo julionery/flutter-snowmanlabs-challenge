@@ -36,15 +36,25 @@ class QuestionTile extends StatelessWidget {
                   bottomLeft: Radius.circular(10)),
             ),
             margin: const EdgeInsets.only(left: 3),
-            child: ExpansionTile(
-              title: Text(
-                title,
-                style: const TextStyle(
-                    fontWeight: FontWeight.bold, color: Colors.black),
+            child: Theme(
+              data: ThemeData(accentColor: Colors.grey),
+              child: ExpansionTile(
+                title: Text(
+                  title,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                      fontSize: 18),
+                ),
+                childrenPadding:
+                    const EdgeInsets.only(left: 16, right: 16, bottom: 12),
+                children: [
+                  Text(
+                    answer,
+                    style: TextStyle(color: Colors.grey[600], fontSize: 15),
+                  )
+                ],
               ),
-              childrenPadding:
-                  const EdgeInsets.only(left: 16, right: 16, bottom: 12),
-              children: [Text(answer)],
             ),
           ),
         ),
