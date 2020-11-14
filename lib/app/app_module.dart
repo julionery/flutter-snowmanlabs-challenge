@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'modules/question/question_module.dart';
 
 import 'app_controller.dart';
 import 'app_widget.dart';
 import 'core/consts/routers_const.dart';
 import 'modules/home/home_module.dart';
+import 'modules/question/question_module.dart';
 import 'modules/splash/splash_screen.dart';
 
 class AppModule extends MainModule {

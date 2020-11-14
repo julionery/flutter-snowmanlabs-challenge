@@ -15,6 +15,9 @@ class SearchDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     const itemColor = Colors.white70;
 
+    final TextEditingController textController = TextEditingController();
+    textController.text = initialText;
+
     return Stack(
       children: [
         Card(
@@ -31,8 +34,8 @@ class SearchDialog extends StatelessWidget {
                   color: ColorsConst().backgroundMainColor(1),
                   borderRadius: const BorderRadius.all(Radius.circular(10))),
               child: TextFormField(
+                controller: textController,
                 style: const TextStyle(color: Colors.white),
-                initialValue: initialText,
                 textInputAction: TextInputAction.search,
                 autofocus: true,
                 decoration: InputDecoration(
@@ -50,21 +53,19 @@ class SearchDialog extends StatelessWidget {
                         const ColoredBox(
                           color: Colors.white38,
                           child: SizedBox(
-                            height: 30,
+                            height: 25,
                             width: 1.5,
                           ),
                         ),
                         IconButton(
                           icon: const Icon(AntDesign.close),
                           color: itemColor,
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
+                          onPressed: textController.clear,
                         ),
                       ],
                     )),
                 onFieldSubmitted: (text) {
-                  Navigator.of(context).pop(text);
+                  Navigator.of(context).pop(text.trim());
                 },
               ),
             ),

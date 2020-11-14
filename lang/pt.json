@@ -12,5 +12,12 @@
   },
   "search_dialog": {
     "hint": "Procurar perguntas"
+  },
+  "search_widget": {
+    "text": "Pesquisa:"
+  },
+  "app_messages": {
+    "success": "Pergunta adicionada com sucesso",
+    "fail": "Falha ao cadastrar a pergunta"
   }
 }

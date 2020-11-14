@@ -12,5 +12,12 @@
   },
   "search_dialog": {
     "hint": "Search questions"
+  },
+  "search_widget": {
+    "text": "Search:"
+  },
+  "app_messages": {
+    "success": "Question added successfully",
+    "fail": "Failed to register the question"
   }
 }

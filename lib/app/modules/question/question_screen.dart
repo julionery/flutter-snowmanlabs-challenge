@@ -105,7 +105,9 @@ class _QuestionScreenState
                               await controller.save().catchError(
                                 (error) {
                                   CustomSnackBar().snackBar(
-                                      context, "Falha ao cadastrar",
+                                      context,
+                                      AppTranslate(context)
+                                          .text('app_messages.fail'),
                                       iconData: AntDesign.closecircle,
                                       color: ColorsConst.fail);
                                 },

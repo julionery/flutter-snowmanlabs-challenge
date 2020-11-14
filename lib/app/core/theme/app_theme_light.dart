@@ -14,6 +14,7 @@ class AppThemeLight implements IThemeAppInterface {
       ),
       brightness: Brightness.light,
       accentColor: ColorsConst().mainColor(1),
+      buttonColor: ColorsConst().secondaryColor(1),
       appBarTheme: const AppBarTheme(
         elevation: 0,
         centerTitle: true,

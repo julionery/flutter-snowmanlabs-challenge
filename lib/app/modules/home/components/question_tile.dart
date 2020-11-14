@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/utils/app_converters.dart';
+
 class QuestionTile extends StatelessWidget {
   final String title;
   final String answer;
-  final Color color;
+  final String hexColor;
 
   const QuestionTile({
     this.title,
     this.answer,
-    this.color,
+    this.hexColor,
   });
 
   @override
@@ -24,7 +26,7 @@ class QuestionTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.0),
         child: Container(
           decoration: BoxDecoration(
-            color: color,
+            color: AppConverters.hexToFlutterColor(hexColor: hexColor),
             borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(10), bottomLeft: Radius.circular(10)),
           ),
