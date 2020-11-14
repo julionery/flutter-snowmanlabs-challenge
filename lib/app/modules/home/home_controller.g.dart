@@ -47,11 +47,41 @@ mixin _$HomeController on _HomeController, Store {
     });
   }
 
+  final _$questionListAtom = Atom(name: '_HomeController.questionList');
+
+  @override
+  ObservableStream<List<QuestionModel>> get questionList {
+    _$questionListAtom.reportRead();
+    return super.questionList;
+  }
+
+  @override
+  set questionList(ObservableStream<List<QuestionModel>> value) {
+    _$questionListAtom.reportWrite(value, super.questionList, () {
+      super.questionList = value;
+    });
+  }
+
+  final _$_HomeControllerActionController =
+      ActionController(name: '_HomeController');
+
+  @override
+  void getList() {
+    final _$actionInfo = _$_HomeControllerActionController.startAction(
+        name: '_HomeController.getList');
+    try {
+      return super.getList();
+    } finally {
+      _$_HomeControllerActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
 loading: ${loading},
 search: ${search},
+questionList: ${questionList},
 searchIsNotEmpty: ${searchIsNotEmpty}
     ''';
   }

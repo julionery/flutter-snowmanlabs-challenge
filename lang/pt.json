@@ -18,6 +18,11 @@
   },
   "app_messages": {
     "success": "Pergunta adicionada com sucesso",
-    "fail": "Falha ao cadastrar a pergunta"
+    "fail": "Falha ao cadastrar a pergunta",
+    "records_not_found": "Nenhum registro encontrado",
+    "error_list": "Falha ao carregar a lista"
+  },
+  "app_buttons": {
+    "reload": "Recarregar"
   }
 }

@@ -7,9 +7,12 @@ import 'package:flutter_modular/flutter_modular.dart';
 import '../../core/consts/colors_const.dart';
 import '../../core/consts/theme_const.dart';
 import '../../core/localization/app_translate.dart';
+import '../../models/question_model.dart';
 import '../../modules/home/home_controller.dart';
 import '../../widgets/custom_raised_button.dart';
 import '../../widgets/custom_snack_bars.dart';
+import '../../widgets/empty_widget.dart';
+import '../../widgets/list_error_widget.dart';
 import '../../widgets/search_dialog.dart';
 import '../../widgets/search_widget.dart';
 import 'components/question_tile.dart';
@@ -54,7 +57,31 @@ class _HomeScreenState extends ModularState<HomeScreen, HomeController> {
           },
         ),
       ),
-      body: Observer(builder: (context) {
+      body: Observer(builder: (_) {
+        if (controller.questionList.hasError) {
+          return ListErrorWidget(
+            title: AppTranslate(context).text('app_messages.error_list'),
+            iconData: MaterialCommunityIcons.restart,
+            onPressed: controller.getList,
+          );
+        }
+
+        if (controller.questionList.data == null) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+
+        final List<QuestionModel> list =
+            controller.questionList.data as List<QuestionModel>;
+
+        if (list.isEmpty) {
+          return EmptyWidget(
+            title: AppTranslate(context).text('app_messages.records_not_found'),
+            iconData: Icons.list,
+          );
+        }
+
         return Column(
           children: [
             if (controller.searchIsNotEmpty) ...[
@@ -70,13 +97,13 @@ class _HomeScreenState extends ModularState<HomeScreen, HomeController> {
                       right: 16,
                       bottom: 20,
                       top: controller.searchIsNotEmpty ? 8 : 20),
-                  itemCount: 30,
+                  itemCount: list.length,
                   itemBuilder: (_, index) {
-                    return const QuestionTile(
-                      title: "Título da Pergunta",
-                      hexColor: "#ff0000",
-                      answer:
-                          "Mussum Ipsum, cacilds vidis litro abertis. Não sou faixa preta cumpadi, sou preto inteiris, inteiris. Si u mundo tá muito paradis? Toma um mé que o mundo vai girarzis! Praesent malesuada urna nisi, quis volutpat erat hendrerit non. Nam vulputate dapibus. Vehicula non. Ut sed ex eros. Vivamus sit amet nibh non tellus tristique interdum.",
+                    final QuestionModel model = list[index];
+                    return QuestionTile(
+                      title: model.title,
+                      answer: model.answer,
+                      hexColor: model.color,
                     );
                   }),
             ),

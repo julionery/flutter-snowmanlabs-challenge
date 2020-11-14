@@ -60,7 +60,13 @@ class SearchDialog extends StatelessWidget {
                         IconButton(
                           icon: const Icon(AntDesign.close),
                           color: itemColor,
-                          onPressed: textController.clear,
+                          onPressed: () {
+                            if (textController.text.isNotEmpty) {
+                              textController.clear();
+                            } else {
+                              Navigator.of(context).pop();
+                            }
+                          },
                         ),
                       ],
                     )),

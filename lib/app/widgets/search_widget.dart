@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 
 import '../core/localization/app_translate.dart';
 
@@ -43,8 +44,8 @@ class SearchWidget extends StatelessWidget {
             height: 32,
             shape: const CircleBorder(),
             child: const Icon(
-              Icons.close,
-              size: 20,
+              FontAwesome.close,
+              size: 18,
             ),
           ),
         ],

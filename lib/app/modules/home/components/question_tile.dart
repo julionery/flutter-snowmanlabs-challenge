@@ -51,9 +51,13 @@ class QuestionTile extends StatelessWidget {
                 childrenPadding:
                     const EdgeInsets.only(left: 16, right: 16, bottom: 12),
                 children: [
-                  Text(
-                    answer,
-                    style: TextStyle(color: Colors.grey[600], fontSize: 15),
+                  SizedBox(
+                    width: double.infinity,
+                    child: Text(
+                      answer,
+                      textAlign: TextAlign.justify,
+                      style: TextStyle(color: Colors.grey[600], fontSize: 15),
+                    ),
                   )
                 ],
               ),

@@ -18,6 +18,11 @@
   },
   "app_messages": {
     "success": "Question added successfully",
-    "fail": "Failed to register the question"
+    "fail": "Failed to register the question",
+    "records_not_found": "No records found",
+    "error_list": "Failed to load a list"
+  },
+  "app_buttons": {
+    "reload": "Reload"
   }
 }
