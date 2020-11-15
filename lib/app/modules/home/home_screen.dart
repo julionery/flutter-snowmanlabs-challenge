@@ -9,6 +9,8 @@ import '../../core/consts/theme_const.dart';
 import '../../core/localization/app_translate.dart';
 import '../../models/question_model.dart';
 import '../../modules/home/home_controller.dart';
+import '../../widgets/actions_bottom_sheet.dart';
+import '../../widgets/custom_alert_dialog.dart';
 import '../../widgets/custom_raised_button.dart';
 import '../../widgets/custom_snack_bars.dart';
 import '../../widgets/empty_widget.dart';
@@ -48,7 +50,7 @@ class _HomeScreenState extends ModularState<HomeScreen, HomeController> {
           text: AppTranslate(context).text('home.add_button'),
           iconData: FontAwesome.plus,
           onPressed: () async {
-            final result = await controller.doAddQuestion();
+            final result = await controller.goQuestion();
             if (result != null && result) {
               CustomSnackBar().flushBar(
                   context, AppTranslate(context).text('app_messages.success'),
@@ -58,7 +60,7 @@ class _HomeScreenState extends ModularState<HomeScreen, HomeController> {
         ),
       ),
       body: Observer(builder: (_) {
-        if (controller.questionList.hasError) {
+        if (controller.allQuestion.hasError) {
           return ListErrorWidget(
             title: AppTranslate(context).text('app_messages.error_list'),
             iconData: MaterialCommunityIcons.restart,
@@ -66,16 +68,16 @@ class _HomeScreenState extends ModularState<HomeScreen, HomeController> {
           );
         }
 
-        if (controller.questionList.data == null) {
+        if (controller.allQuestion.data == null) {
           return const Center(
             child: CircularProgressIndicator(),
           );
         }
 
-        final List<QuestionModel> list =
-            controller.questionList.data as List<QuestionModel>;
+        final List<QuestionModel> filteredList =
+            controller.getFilteredQuestions();
 
-        if (list.isEmpty) {
+        if (filteredList.isEmpty) {
           return EmptyWidget(
             title: AppTranslate(context).text('app_messages.records_not_found'),
             iconData: Icons.list,
@@ -91,21 +93,46 @@ class _HomeScreenState extends ModularState<HomeScreen, HomeController> {
               )
             ],
             Expanded(
-              child: ListView.builder(
-                  padding: EdgeInsets.only(
-                      left: 16,
-                      right: 16,
-                      bottom: 20,
-                      top: controller.searchIsNotEmpty ? 8 : 20),
-                  itemCount: list.length,
-                  itemBuilder: (_, index) {
-                    final QuestionModel model = list[index];
-                    return QuestionTile(
-                      title: model.title,
-                      answer: model.answer,
-                      hexColor: model.color,
-                    );
-                  }),
+              child: RefreshIndicator(
+                onRefresh: () async => controller.getList(),
+                child: ListView.builder(
+                    padding: EdgeInsets.only(
+                        left: 16,
+                        right: 16,
+                        bottom: 20,
+                        top: controller.searchIsNotEmpty ? 8 : 20),
+                    itemCount: filteredList.length,
+                    itemBuilder: (_, index) {
+                      final QuestionModel model = filteredList[index];
+                      return QuestionTile(
+                        title: model.title,
+                        answer: model.answer,
+                        hexColor: model.color,
+                        onLongPress: () {
+                          showModalBottomSheet(
+                              context: context,
+                              builder: (context) => ActionsBottomSheet(
+                                    update: () async {
+                                      Navigator.of(context).pop();
+                                      final result =
+                                          await controller.goQuestion(model);
+                                      if (result != null && result) {
+                                        CustomSnackBar().flushBar(
+                                            context,
+                                            AppTranslate(context)
+                                                .text('app_messages.success'),
+                                            color: ColorsConst.success,
+                                            iconData: Icons.check_circle);
+                                      }
+                                    },
+                                    delete: () {
+                                      _delete(context, model);
+                                    },
+                                  ));
+                        },
+                      );
+                    }),
+              ),
             ),
           ],
         );
@@ -120,5 +147,20 @@ class _HomeScreenState extends ModularState<HomeScreen, HomeController> {
     if (search != null) {
       controller.search = search;
     }
+  }
+
+  void _delete(BuildContext context, QuestionModel model) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return CustomAlertDialog(
+          okPressed: () {
+            model.delete();
+            Navigator.of(context).pop();
+            Navigator.of(context).pop();
+          },
+        );
+      },
+    );
   }
 }

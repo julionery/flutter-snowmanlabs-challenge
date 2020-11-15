@@ -5,7 +5,9 @@
   },
   "question": {
     "title": "Adicionar Pergunta",
+    "title_editing": "Editanto Pergunta",
     "add_button": "Adicionar",
+    "update_button": "Atualizar",
     "form_title": "Título da Pergunta",
     "form_answer": "Resposta da Pergunta",
     "form_color": "Cor"
@@ -20,9 +22,18 @@
     "success": "Pergunta adicionada com sucesso",
     "fail": "Falha ao cadastrar a pergunta",
     "records_not_found": "Nenhum registro encontrado",
-    "error_list": "Falha ao carregar a lista"
+    "error_list": "Falha ao carregar a lista",
+    "delete": "Deseja realmente deletar este registro?"
   },
   "app_buttons": {
-    "reload": "Recarregar"
+    "reload": "Recarregar",
+    "update": "Atualizar",
+    "delete": "Deletar",
+    "cancel": "Cancelar",
+    "yes": "Sim"
+  },
+  "bottom_sheet": {
+    "title": "Alterar registro",
+    "message":  "Selecionar uma ação para o registro"
   }
 }

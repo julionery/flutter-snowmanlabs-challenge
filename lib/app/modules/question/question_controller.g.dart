@@ -24,48 +24,48 @@ mixin _$QuestionController on _QuestionController, Store {
     });
   }
 
-  final _$titleAtom = Atom(name: '_QuestionController.title');
+  final _$isEditingAtom = Atom(name: '_QuestionController.isEditing');
 
   @override
-  String get title {
-    _$titleAtom.reportRead();
-    return super.title;
+  bool get isEditing {
+    _$isEditingAtom.reportRead();
+    return super.isEditing;
   }
 
   @override
-  set title(String value) {
-    _$titleAtom.reportWrite(value, super.title, () {
-      super.title = value;
+  set isEditing(bool value) {
+    _$isEditingAtom.reportWrite(value, super.isEditing, () {
+      super.isEditing = value;
     });
   }
 
-  final _$answerAtom = Atom(name: '_QuestionController.answer');
+  final _$modelAtom = Atom(name: '_QuestionController.model');
 
   @override
-  String get answer {
-    _$answerAtom.reportRead();
-    return super.answer;
+  QuestionModel get model {
+    _$modelAtom.reportRead();
+    return super.model;
   }
 
   @override
-  set answer(String value) {
-    _$answerAtom.reportWrite(value, super.answer, () {
-      super.answer = value;
+  set model(QuestionModel value) {
+    _$modelAtom.reportWrite(value, super.model, () {
+      super.model = value;
     });
   }
 
-  final _$colorAtom = Atom(name: '_QuestionController.color');
+  final _$selectedColorAtom = Atom(name: '_QuestionController.selectedColor');
 
   @override
-  String get color {
-    _$colorAtom.reportRead();
-    return super.color;
+  String get selectedColor {
+    _$selectedColorAtom.reportRead();
+    return super.selectedColor;
   }
 
   @override
-  set color(String value) {
-    _$colorAtom.reportWrite(value, super.color, () {
-      super.color = value;
+  set selectedColor(String value) {
+    _$selectedColorAtom.reportWrite(value, super.selectedColor, () {
+      super.selectedColor = value;
     });
   }
 
@@ -73,9 +73,9 @@ mixin _$QuestionController on _QuestionController, Store {
   String toString() {
     return '''
 loading: ${loading},
-title: ${title},
-answer: ${answer},
-color: ${color}
+isEditing: ${isEditing},
+model: ${model},
+selectedColor: ${selectedColor}
     ''';
   }
 }

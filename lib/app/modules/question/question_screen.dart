@@ -25,11 +25,12 @@ class _QuestionScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        shape: ThemeConst.roundedRectangleBorder,
-        title: Text(
-          AppTranslate(context).text('question.title'),
-        ),
-      ),
+          shape: ThemeConst.roundedRectangleBorder,
+          title: Text(
+            controller.isEditing
+                ? AppTranslate(context).text('question.title_editing')
+                : AppTranslate(context).text('question.title'),
+          )),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
@@ -43,54 +44,58 @@ class _QuestionScreenState
               ),
               child: Column(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      children: [
-                        CustomTextFormField(
-                          label:
-                              AppTranslate(context).text('question.form_title'),
-                          onChanged: (value) => controller.title = value,
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        CustomTextFormField(
-                          label: AppTranslate(context)
-                              .text('question.form_answer'),
-                          maxLines: 4,
-                          onChanged: (value) => controller.answer = value,
-                        ),
-                        const SizedBox(
-                          height: 24,
-                        ),
-                        Column(
-                          children: [
-                            Text(
-                                AppTranslate(context)
-                                    .text('question.form_color'),
-                                style: TextStyle(
-                                    color: Colors.grey[500],
-                                    letterSpacing: 0.5,
-                                    fontWeight: FontWeight.w600)),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            Observer(builder: (context) {
-                              return SizedBox(
+                  Observer(builder: (context) {
+                    return Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        children: [
+                          CustomTextFormField(
+                            label: AppTranslate(context)
+                                .text('question.form_title'),
+                            initialValue: controller.model.title,
+                            onChanged: (value) =>
+                                controller.model.title = value,
+                          ),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          CustomTextFormField(
+                            label: AppTranslate(context)
+                                .text('question.form_answer'),
+                            maxLines: 4,
+                            initialValue: controller.model.answer,
+                            onChanged: (value) =>
+                                controller.model.answer = value,
+                          ),
+                          const SizedBox(
+                            height: 24,
+                          ),
+                          Column(
+                            children: [
+                              Text(
+                                  AppTranslate(context)
+                                      .text('question.form_color'),
+                                  style: TextStyle(
+                                      color: Colors.grey[500],
+                                      letterSpacing: 0.5,
+                                      fontWeight: FontWeight.w600)),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              SizedBox(
                                 width: double.infinity,
                                 height: 60,
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: _buildCircleColorWidgets(),
                                 ),
-                              );
-                            }),
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    );
+                  }),
                   ClipRRect(
                     borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.circular(10),
@@ -112,7 +117,7 @@ class _QuestionScreenState
                                       color: ColorsConst.fail);
                                 },
                               );
-                              Navigator.of(context).pop(true);
+                              Modular.to.pop(true);
                             }
                           },
                           child: controller.loading
@@ -121,8 +126,11 @@ class _QuestionScreenState
                                   width: 25,
                                   child: CircularProgressIndicator())
                               : Text(
-                                  AppTranslate(context)
-                                      .text('question.add_button'),
+                                  controller.isEditing
+                                      ? AppTranslate(context)
+                                          .text('question.update_button')
+                                      : AppTranslate(context)
+                                          .text('question.add_button'),
                                   style: TextStyle(
                                       color: Theme.of(context).primaryColor,
                                       fontWeight: FontWeight.bold,
@@ -145,8 +153,11 @@ class _QuestionScreenState
     for (final hexColor in ColorsConst.arrayColorsQuestion) {
       items.add(CircleColorWidget(
         color: AppConverters.hexToFlutterColor(hexColor: hexColor),
-        selected: controller.color == hexColor,
-        onTap: () => controller.color = hexColor,
+        selected: controller.selectedColor == hexColor,
+        onTap: () {
+          controller.selectedColor = hexColor;
+          controller.model.color = hexColor;
+        },
       ));
     }
     return items;

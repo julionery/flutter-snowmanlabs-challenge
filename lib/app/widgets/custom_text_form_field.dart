@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final String label;
+  final String initialValue;
   final int maxLines;
   final ValueChanged<String> onChanged;
 
-  const CustomTextFormField({this.label, this.maxLines = 1, this.onChanged});
+  const CustomTextFormField(
+      {this.label, this.maxLines = 1, this.onChanged, this.initialValue});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      initialValue: initialValue,
       style: const TextStyle(fontSize: 18.0),
       onChanged: onChanged,
       maxLines: maxLines,

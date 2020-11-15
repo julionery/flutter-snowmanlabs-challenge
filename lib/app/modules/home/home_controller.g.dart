@@ -47,18 +47,18 @@ mixin _$HomeController on _HomeController, Store {
     });
   }
 
-  final _$questionListAtom = Atom(name: '_HomeController.questionList');
+  final _$allQuestionAtom = Atom(name: '_HomeController.allQuestion');
 
   @override
-  ObservableStream<List<QuestionModel>> get questionList {
-    _$questionListAtom.reportRead();
-    return super.questionList;
+  ObservableStream<List<QuestionModel>> get allQuestion {
+    _$allQuestionAtom.reportRead();
+    return super.allQuestion;
   }
 
   @override
-  set questionList(ObservableStream<List<QuestionModel>> value) {
-    _$questionListAtom.reportWrite(value, super.questionList, () {
-      super.questionList = value;
+  set allQuestion(ObservableStream<List<QuestionModel>> value) {
+    _$allQuestionAtom.reportWrite(value, super.allQuestion, () {
+      super.allQuestion = value;
     });
   }
 
@@ -81,7 +81,7 @@ mixin _$HomeController on _HomeController, Store {
     return '''
 loading: ${loading},
 search: ${search},
-questionList: ${questionList},
+allQuestion: ${allQuestion},
 searchIsNotEmpty: ${searchIsNotEmpty}
     ''';
   }

@@ -1,7 +1,9 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
 import '../../core/consts/colors_const.dart';
+import '../../models/question_model.dart';
+import '../../modules/home/home_controller.dart';
 
 part 'question_controller.g.dart';
 
@@ -12,22 +14,31 @@ abstract class _QuestionController with Store {
   bool loading = false;
 
   @observable
-  String title = '';
+  bool isEditing = false;
 
   @observable
-  String answer = '';
+  QuestionModel model;
 
   @observable
-  String color = ColorsConst.arrayColorsQuestion.first;
+  String selectedColor = ColorsConst.arrayColorsQuestion.first;
+
+  _QuestionController() {
+    final homeStore = Modular.get<HomeController>();
+
+    if (homeStore.questionEditing != null) {
+      model = homeStore.questionEditing;
+      selectedColor = model.color;
+      isEditing = true;
+    } else {
+      model = QuestionModel();
+      model.color = selectedColor;
+      isEditing = false;
+    }
+  }
 
   Future<void> save() async {
     loading = true;
-
-    debugPrint(title);
-    debugPrint(answer);
-
-    await Future.delayed(const Duration(seconds: 3));
+    model.save();
     loading = false;
-    // throw "response";
   }
 }

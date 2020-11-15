@@ -19,7 +19,9 @@ abstract class _HomeController with Store {
   String search = '';
 
   @observable
-  ObservableStream<List<QuestionModel>> questionList;
+  ObservableStream<List<QuestionModel>> allQuestion;
+
+  QuestionModel questionEditing;
 
   _HomeController(this.repository) {
     getList();
@@ -30,10 +32,26 @@ abstract class _HomeController with Store {
 
   @action
   void getList() {
-    questionList = repository.getQuestions().asObservable();
+    allQuestion = repository.getQuestions().asObservable();
   }
 
-  Future<bool> doAddQuestion() async {
+  List<QuestionModel> getFilteredQuestions() {
+    final List<QuestionModel> filteredList = [];
+
+    final List<QuestionModel> list = allQuestion.data as List<QuestionModel>;
+
+    if (search == null || search.isEmpty) {
+      filteredList.addAll(list);
+    } else {
+      filteredList.addAll(list
+          .where((p) => p.title.toLowerCase().contains(search.toLowerCase())));
+    }
+
+    return filteredList;
+  }
+
+  Future<bool> goQuestion([QuestionModel model]) async {
+    questionEditing = model;
     final result = await Modular.to.pushNamed(RoutersConst.question);
     return result as bool;
   }

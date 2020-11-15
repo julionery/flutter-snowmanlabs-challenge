@@ -5,7 +5,9 @@
   },
   "question": {
     "title": "Add Question",
+    "title_editing": "Editing Question",
     "add_button": "Add",
+    "update_button": "Update",
     "form_title": "Question title",
     "form_answer": "Question answer",
     "form_color": "Color"
@@ -20,9 +22,18 @@
     "success": "Question added successfully",
     "fail": "Failed to register the question",
     "records_not_found": "No records found",
-    "error_list": "Failed to load a list"
+    "error_list": "Failed to load a list",
+    "delete": "Do you really want to delete this record?"
   },
   "app_buttons": {
-    "reload": "Reload"
+    "reload": "Reload",
+    "update": "Update",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "yes": "Yes"
+  },
+  "bottom_sheet": {
+    "title": "Change record",
+    "message": "Select an action for the record"
   }
 }
