@@ -16,6 +16,13 @@ mixin _$HomeController on _HomeController, Store {
           () => super.searchIsNotEmpty,
           name: '_HomeController.searchIsNotEmpty'))
       .value;
+  Computed<List<QuestionModel>> _$filteredQuestionsComputed;
+
+  @override
+  List<QuestionModel> get filteredQuestions => (_$filteredQuestionsComputed ??=
+          Computed<List<QuestionModel>>(() => super.filteredQuestions,
+              name: '_HomeController.filteredQuestions'))
+      .value;
 
   final _$loadingAtom = Atom(name: '_HomeController.loading');
 
@@ -62,18 +69,19 @@ mixin _$HomeController on _HomeController, Store {
     });
   }
 
-  final _$_HomeControllerActionController =
-      ActionController(name: '_HomeController');
+  final _$getListAsyncAction = AsyncAction('_HomeController.getList');
 
   @override
-  void getList() {
-    final _$actionInfo = _$_HomeControllerActionController.startAction(
-        name: '_HomeController.getList');
-    try {
-      return super.getList();
-    } finally {
-      _$_HomeControllerActionController.endAction(_$actionInfo);
-    }
+  Future<dynamic> getList() {
+    return _$getListAsyncAction.run(() => super.getList());
+  }
+
+  final _$deleteQuestionAsyncAction =
+      AsyncAction('_HomeController.deleteQuestion');
+
+  @override
+  Future<void> deleteQuestion(QuestionModel model) {
+    return _$deleteQuestionAsyncAction.run(() => super.deleteQuestion(model));
   }
 
   @override
@@ -82,7 +90,8 @@ mixin _$HomeController on _HomeController, Store {
 loading: ${loading},
 search: ${search},
 allQuestion: ${allQuestion},
-searchIsNotEmpty: ${searchIsNotEmpty}
+searchIsNotEmpty: ${searchIsNotEmpty},
+filteredQuestions: ${filteredQuestions}
     ''';
   }
 }

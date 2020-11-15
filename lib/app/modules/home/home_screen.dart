@@ -54,8 +54,8 @@ class _HomeScreenState extends ModularState<HomeScreen, HomeController> {
             text: AppTranslate(context).text('home.add_button'),
             iconData: FontAwesome.plus,
             onPressed: () async {
-              final result = await controller.goQuestion();
-              if (result != null && result) {
+              final response = await controller.goQuestion();
+              if (response != null && response) {
                 CustomSnackBar().flushBar(context,
                     AppTranslate(context).text('app_messages.success_added'),
                     color: ColorsConst.success, iconData: Icons.check_circle);
@@ -76,7 +76,8 @@ class _HomeScreenState extends ModularState<HomeScreen, HomeController> {
                 child: RefreshIndicator(
                   onRefresh: () async => controller.getList(),
                   child: Observer(builder: (_) {
-                    if (controller.allQuestion.hasError) {
+                    if (controller.allQuestion == null ||
+                        controller.allQuestion.hasError) {
                       return ListErrorWidget(
                         title: AppTranslate(context)
                             .text('app_messages.error_list'),
@@ -92,7 +93,7 @@ class _HomeScreenState extends ModularState<HomeScreen, HomeController> {
                     }
 
                     final List<QuestionModel> filteredList =
-                        controller.getFilteredQuestions();
+                        controller.filteredQuestions;
 
                     if (filteredList.isEmpty) {
                       return EmptyWidget(
@@ -121,9 +122,9 @@ class _HomeScreenState extends ModularState<HomeScreen, HomeController> {
                                   builder: (context) => ActionsBottomSheet(
                                         update: () async {
                                           Navigator.of(context).pop();
-                                          final result = await controller
+                                          final response = await controller
                                               .goQuestion(model);
-                                          if (result != null && result) {
+                                          if (response != null && response) {
                                             CustomSnackBar().flushBar(
                                                 _scaffoldKey.currentContext,
                                                 AppTranslate(_scaffoldKey
@@ -162,16 +163,24 @@ class _HomeScreenState extends ModularState<HomeScreen, HomeController> {
       context: context,
       builder: (BuildContext context) {
         return CustomAlertDialog(
-          okPressed: () {
-            controller.deleteQuestion(model);
+          okPressed: () async {
             Navigator.of(context).pop();
-            Navigator.of(context).pop();
-            CustomSnackBar().flushBar(
-                _scaffoldKey.currentContext,
-                AppTranslate(_scaffoldKey.currentContext)
-                    .text('app_messages.success_deleted'),
-                color: ColorsConst.fail,
-                iconData: Icons.delete);
+
+            await controller.deleteQuestion(model).then((_) {
+              Navigator.of(context).pop();
+              CustomSnackBar().flushBar(
+                  _scaffoldKey.currentContext,
+                  AppTranslate(_scaffoldKey.currentContext)
+                      .text('app_messages.success_deleted'),
+                  color: ColorsConst.fail,
+                  iconData: Icons.delete);
+            }).catchError(
+              (error) {
+                CustomSnackBar().flushBar(
+                    _scaffoldKey.currentContext, error.message as String,
+                    color: Colors.red, iconData: Feather.alert_triangle);
+              },
+            );
           },
         );
       },

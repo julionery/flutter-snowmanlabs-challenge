@@ -107,17 +107,17 @@ class _QuestionScreenState
                         return RaisedButton(
                           onPressed: () async {
                             if (formKey.currentState.validate()) {
-                              await controller.save().catchError(
+                              await controller
+                                  .save()
+                                  .then((value) => Modular.to.pop(true))
+                                  .catchError(
                                 (error) {
-                                  CustomSnackBar().snackBar(
-                                      context,
-                                      AppTranslate(context)
-                                          .text('app_messages.fail'),
-                                      iconData: AntDesign.closecircle,
-                                      color: ColorsConst.fail);
+                                  CustomSnackBar().flushBar(
+                                      context, error.message as String,
+                                      color: Colors.red,
+                                      iconData: AntDesign.closecircle);
                                 },
                               );
-                              Modular.to.pop(true);
                             }
                           },
                           child: controller.loading

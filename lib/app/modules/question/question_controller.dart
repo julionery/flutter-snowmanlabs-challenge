@@ -2,6 +2,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
 import '../../core/consts/colors_const.dart';
+import '../../interfaces/question_repository_interface.dart';
 import '../../models/question_model.dart';
 import '../../modules/home/home_controller.dart';
 
@@ -10,6 +11,8 @@ part 'question_controller.g.dart';
 class QuestionController = _QuestionController with _$QuestionController;
 
 abstract class _QuestionController with Store {
+  final IQuestionRepository repository;
+
   @observable
   bool loading = false;
 
@@ -22,7 +25,7 @@ abstract class _QuestionController with Store {
   @observable
   String selectedColor = ColorsConst.arrayColorsQuestion.first;
 
-  _QuestionController() {
+  _QuestionController(this.repository) {
     final homeStore = Modular.get<HomeController>();
 
     if (homeStore.questionEditing != null) {
@@ -38,8 +41,10 @@ abstract class _QuestionController with Store {
 
   Future<void> save() async {
     loading = true;
-    final homeStore = Modular.get<HomeController>();
-    await homeStore.saveQuestion(model);
+    final response = await repository.save(model);
     loading = false;
+    if (!response.success) {
+      throw response;
+    }
   }
 }

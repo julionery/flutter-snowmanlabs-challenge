@@ -30,12 +30,8 @@ abstract class _HomeController with Store {
   @computed
   bool get searchIsNotEmpty => search.isNotEmpty;
 
-  @action
-  void getList() {
-    allQuestion = repository.getQuestions().asObservable();
-  }
-
-  List<QuestionModel> getFilteredQuestions() {
+  @computed
+  List<QuestionModel> get filteredQuestions {
     final List<QuestionModel> filteredList = [];
 
     final List<QuestionModel> list = allQuestion.data as List<QuestionModel>;
@@ -50,13 +46,26 @@ abstract class _HomeController with Store {
     return filteredList;
   }
 
-  Future<bool> goQuestion([QuestionModel model]) async {
-    questionEditing = model;
-    final result = await Modular.to.pushNamed(RoutersConst.question);
-    return result as bool;
+  @action
+  Future getList() async {
+    final response = await repository.getQuestions();
+    if (response.success) {
+      final result = response.object as Stream<List<QuestionModel>>;
+      allQuestion = result.asObservable();
+    }
   }
 
-  Future saveQuestion(QuestionModel model) => repository.save(model);
+  @action
+  Future<void> deleteQuestion(QuestionModel model) async {
+    final response = await repository.delete(model);
+    if (!response.success) {
+      throw response;
+    }
+  }
 
-  Future deleteQuestion(QuestionModel model) => repository.delete(model);
+  Future<bool> goQuestion([QuestionModel model]) async {
+    questionEditing = model;
+    final response = await Modular.to.pushNamed(RoutersConst.question);
+    return response as bool;
+  }
 }

@@ -1,9 +1,10 @@
+import '../core/responses/response_defult.dart';
 import '../models/question_model.dart';
 
 abstract class IQuestionRepository {
-  Stream<List<QuestionModel>> getQuestions();
+  Future<DefaultResponse> getQuestions();
 
-  Future save(QuestionModel model);
+  Future<DefaultResponse> save(QuestionModel model);
 
-  Future delete(QuestionModel model);
+  Future<DefaultResponse> delete(QuestionModel model);
 }
