@@ -19,7 +19,9 @@
     "text": "Pesquisa:"
   },
   "app_messages": {
-    "success": "Pergunta adicionada com sucesso",
+    "success_added": "Pergunta adicionada com sucesso",
+    "success_updated": "Pergunta atualizada com sucesso",
+    "success_deleted": "Pergunta deletada com sucesso",
     "fail": "Falha ao cadastrar a pergunta",
     "records_not_found": "Nenhum registro encontrado",
     "error_list": "Falha ao carregar a lista",

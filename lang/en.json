@@ -19,7 +19,9 @@
     "text": "Search:"
   },
   "app_messages": {
-    "success": "Question added successfully",
+    "success_added": "Question added successfully",
+    "success_updated": "Question updated successfully",
+    "success_deleted": "Question deleted successfully",
     "fail": "Failed to register the question",
     "records_not_found": "No records found",
     "error_list": "Failed to load a list",

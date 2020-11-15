@@ -55,4 +55,8 @@ abstract class _HomeController with Store {
     final result = await Modular.to.pushNamed(RoutersConst.question);
     return result as bool;
   }
+
+  Future saveQuestion(QuestionModel model) => repository.save(model);
+
+  Future deleteQuestion(QuestionModel model) => repository.delete(model);
 }

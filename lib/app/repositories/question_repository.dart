@@ -13,9 +13,32 @@ class QuestionRepository implements IQuestionRepository {
   Stream<List<QuestionModel>> getQuestions() {
     return firestore
         .collection(DatabaseTablesConst.question)
+        .orderBy('inclusion_date')
         .snapshots()
         .map((query) {
       return query.docs.map((doc) => QuestionModel.fromDocument(doc)).toList();
     });
+  }
+
+  @override
+  Future save(QuestionModel model) async {
+    if (model.reference == null) {
+      model.reference = await FirebaseFirestore.instance
+          .collection(DatabaseTablesConst.question)
+          .add({
+        'title': model.title,
+        'answer': model.answer,
+        'color': model.color,
+        'inclusion_date': Timestamp.now()
+      });
+    } else {
+      model.reference.update(
+          {'title': model.title, 'answer': model.answer, 'color': model.color});
+    }
+  }
+
+  @override
+  Future delete(QuestionModel model) {
+    return model.reference.delete();
   }
 }

@@ -1,32 +1,21 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../core/consts/assets_const.dart';
 import '../../core/consts/colors_const.dart';
-import '../../core/consts/routers_const.dart';
+import 'splash_controller.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends ModularState<SplashScreen, SplashController> {
   @override
   void initState() {
     super.initState();
-    initializeFirebase();
-    goToHome();
-  }
-
-  Future<void> initializeFirebase() async {
-    WidgetsFlutterBinding.ensureInitialized();
-    await Firebase.initializeApp();
-  }
-
-  Future<void> goToHome() async {
-    await Future.delayed(const Duration(seconds: 3));
-    Modular.to.pushReplacementNamed(RoutersConst.home);
+    controller.initializeFirebase();
+    controller.goToHome();
   }
 
   @override

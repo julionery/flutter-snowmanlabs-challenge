@@ -38,7 +38,8 @@ abstract class _QuestionController with Store {
 
   Future<void> save() async {
     loading = true;
-    model.save();
+    final homeStore = Modular.get<HomeController>();
+    await homeStore.saveQuestion(model);
     loading = false;
   }
 }

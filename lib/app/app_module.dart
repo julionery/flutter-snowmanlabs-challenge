@@ -6,7 +6,7 @@ import 'app_widget.dart';
 import 'core/consts/routers_const.dart';
 import 'modules/home/home_module.dart';
 import 'modules/question/question_module.dart';
-import 'modules/splash/splash_screen.dart';
+import 'modules/splash/splash_module.dart';
 
 class AppModule extends MainModule {
   @override
@@ -22,8 +22,7 @@ class AppModule extends MainModule {
   @override
   List<ModularRouter> get routers => [
         ModularRouter(RoutersConst.splash,
-            child: (_, args) => SplashScreen(),
-            transition: TransitionType.noTransition),
+            module: SplashModule(), transition: TransitionType.noTransition),
         ModularRouter(
           RoutersConst.home,
           module: HomeModule(),

@@ -60,7 +60,7 @@ class QuestionTile extends StatelessWidget {
                       width: double.infinity,
                       child: Text(
                         answer,
-                        textAlign: TextAlign.justify,
+                        textAlign: TextAlign.start,
                         style: TextStyle(color: Colors.grey[600], fontSize: 15),
                       ),
                     )

@@ -9,6 +9,7 @@ class ColorsConst {
   ];
 
   static Color get success => const Color(0xFF46c9a7);
+  static Color get update => const Color(0xFF17a2b8);
   static Color get fail => const Color(0xFFff7074);
 
   final Color _mainColor = const Color(0xFF10159a);
