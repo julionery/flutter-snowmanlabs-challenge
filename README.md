@@ -12,11 +12,18 @@
 - Como usuário quero poder pesquisar uma pergunta/resposta.
 - Como usuário quero poder criar uma nova pergunta/resposta.
 - Como usuário quero adicionar uma cor a minha pergunta/resposta.
-
+ 
 ### :iphone: Demonstração
+- [Link APK - Instalador Android](https://github.com/julionery/docs/raw/master/geral/faq-snowmanlabs.apk "FAQ Snowmanlabs")
+
 <h3 align="center">
     <img width="250px" src="https://github.com/julionery/docs/blob/master/geral/faq-snowmanlabs.gif?raw=true">
+  <br />
+  <a href="https://github.com/julionery/docs/raw/master/geral/faq-snowmanlabs.apk">
+    <img height="80px" src="https://github.com/julionery/docs/blob/master/geral/APK.png?raw=true">
+  </a>
 </h3>
+
 
 ### :rocket: Tecnologias:
 - [Flutter](https://flutter.dev/ "Flutter")
@@ -55,7 +62,7 @@ $ flutter pub get
 # Execute a aplicação no seu emulador ou dispositivo.
 $ flutter run
 
-# Execultando os testes
+# Executando os testes
 $ flutter test
 ```
 

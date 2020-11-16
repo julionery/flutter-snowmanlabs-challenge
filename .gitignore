@@ -42,3 +42,6 @@ app.*.map.json
 
 # Firebase Config
 android/app/google-services.json
+
+# Keys
+android/app/AppKeysJulioKey.jks
