@@ -4,18 +4,30 @@ class CustomTextFormField extends StatelessWidget {
   final String label;
   final String initialValue;
   final int maxLines;
+  final FocusNode focusNode;
+  final TextInputAction textInputAction;
   final ValueChanged<String> onChanged;
+  final VoidCallback onEditingComplete;
 
   const CustomTextFormField(
-      {this.label, this.maxLines = 1, this.onChanged, this.initialValue});
+      {this.label,
+      this.maxLines = 1,
+      this.onChanged,
+      this.initialValue,
+      this.focusNode,
+      this.onEditingComplete,
+      this.textInputAction});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       initialValue: initialValue,
       style: const TextStyle(fontSize: 18.0),
+      focusNode: focusNode,
       onChanged: onChanged,
+      onEditingComplete: onEditingComplete,
       maxLines: maxLines,
+      textInputAction: textInputAction,
       validator: (value) {
         if (value.trim().isEmpty) {
           return "Campo obrigatório";

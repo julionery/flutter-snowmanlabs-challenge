@@ -1,10 +1,8 @@
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
 import '../../core/consts/colors_const.dart';
 import '../../interfaces/question_repository_interface.dart';
 import '../../models/question_model.dart';
-import '../../modules/home/home_controller.dart';
 
 part 'question_controller.g.dart';
 
@@ -25,11 +23,9 @@ abstract class _QuestionController with Store {
   @observable
   String selectedColor = ColorsConst.arrayColorsQuestion.first;
 
-  _QuestionController(this.repository) {
-    final homeStore = Modular.get<HomeController>();
-
-    if (homeStore.questionEditing != null) {
-      model = homeStore.questionEditing;
+  _QuestionController(this.repository, QuestionModel questionModel) {
+    if (questionModel != null) {
+      model = questionModel;
       selectedColor = model.color;
       isEditing = true;
     } else {

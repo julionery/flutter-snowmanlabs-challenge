@@ -20,6 +20,7 @@ class QuestionScreen extends StatefulWidget {
 class _QuestionScreenState
     extends ModularState<QuestionScreen, QuestionController> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final FocusNode answerFocus = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +54,10 @@ class _QuestionScreenState
                             label: AppTranslate(context)
                                 .text('question.form_title'),
                             initialValue: controller.model.title,
+                            textInputAction: TextInputAction.next,
+                            onEditingComplete: () {
+                              answerFocus.requestFocus();
+                            },
                             onChanged: (value) =>
                                 controller.model.title = value,
                           ),
@@ -62,7 +67,8 @@ class _QuestionScreenState
                           CustomTextFormField(
                             label: AppTranslate(context)
                                 .text('question.form_answer'),
-                            maxLines: 4,
+                            maxLines: 5,
+                            focusNode: answerFocus,
                             initialValue: controller.model.answer,
                             onChanged: (value) =>
                                 controller.model.answer = value,
@@ -105,21 +111,25 @@ class _QuestionScreenState
                       height: 50,
                       child: Observer(builder: (context) {
                         return RaisedButton(
-                          onPressed: () async {
-                            if (formKey.currentState.validate()) {
-                              await controller
-                                  .save()
-                                  .then((value) => Modular.to.pop(true))
-                                  .catchError(
-                                (error) {
-                                  CustomSnackBar().flushBar(
-                                      context, error.message as String,
-                                      color: Colors.red,
-                                      iconData: AntDesign.closecircle);
+                          onPressed: controller.loading
+                              ? null
+                              : () async {
+                                  if (formKey.currentState.validate()) {
+                                    await controller.save().then((_) {
+                                      if (Modular.to.canPop()) {
+                                        Modular.to.pop(true);
+                                      }
+                                    }).catchError(
+                                      (error) {
+                                        CustomSnackBar().flushBar(
+                                            context, error.message as String,
+                                            color: Colors.red,
+                                            iconData: AntDesign.closecircle);
+                                      },
+                                    );
+                                  }
                                 },
-                              );
-                            }
-                          },
+                          disabledColor: Theme.of(context).buttonColor,
                           child: controller.loading
                               ? const SizedBox(
                                   height: 25,

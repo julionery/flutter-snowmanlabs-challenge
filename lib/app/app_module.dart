@@ -5,7 +5,6 @@ import 'app_controller.dart';
 import 'app_widget.dart';
 import 'core/consts/routers_const.dart';
 import 'modules/home/home_module.dart';
-import 'modules/question/question_module.dart';
 import 'modules/splash/splash_module.dart';
 
 class AppModule extends MainModule {
@@ -26,10 +25,6 @@ class AppModule extends MainModule {
         ModularRouter(
           RoutersConst.home,
           module: HomeModule(),
-        ),
-        ModularRouter(
-          RoutersConst.question,
-          module: QuestionModule(),
         ),
       ];
 }

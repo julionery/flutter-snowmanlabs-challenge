@@ -21,6 +21,9 @@ class ActionsBottomSheet extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            const SizedBox(
+              height: 2,
+            ),
             FlatButton(
               padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
               onPressed: update,
@@ -31,6 +34,9 @@ class ActionsBottomSheet extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     color: Theme.of(context).primaryColor),
               ),
+            ),
+            const Divider(
+              height: 4,
             ),
             FlatButton(
               padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),

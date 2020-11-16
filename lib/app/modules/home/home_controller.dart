@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
@@ -20,8 +21,6 @@ abstract class _HomeController with Store {
 
   @observable
   ObservableStream<List<QuestionModel>> allQuestion;
-
-  QuestionModel questionEditing;
 
   _HomeController(this.repository) {
     getList();
@@ -64,8 +63,8 @@ abstract class _HomeController with Store {
   }
 
   Future<bool> goQuestion([QuestionModel model]) async {
-    questionEditing = model;
-    final response = await Modular.to.pushNamed(RoutersConst.question);
+    final response = await Modular.to
+        .pushNamed(RoutersConst.home + RoutersConst.question, arguments: model);
     return response as bool;
   }
 }

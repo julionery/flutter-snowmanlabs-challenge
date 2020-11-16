@@ -54,6 +54,9 @@ $ flutter pub get
 
 # Execute a aplicação no seu emulador ou dispositivo.
 $ flutter run
+
+# Execultando os testes
+$ flutter test
 ```
 
 

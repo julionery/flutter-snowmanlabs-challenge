@@ -167,7 +167,9 @@ class _HomeScreenState extends ModularState<HomeScreen, HomeController> {
             Navigator.of(context).pop();
 
             await controller.deleteQuestion(model).then((_) {
-              Navigator.of(context).pop();
+              if (Navigator.of(context).canPop()) {
+                Navigator.of(context).pop();
+              }
               CustomSnackBar().flushBar(
                   _scaffoldKey.currentContext,
                   AppTranslate(_scaffoldKey.currentContext)
