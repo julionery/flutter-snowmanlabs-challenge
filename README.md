@@ -66,6 +66,9 @@ $ flutter run
 $ flutter test
 ```
 
+- [Instruções de deploy Android - Google.](https://flutter.dev/docs/deployment/android)
+- [Instruções de deploy iOS - Apple.](https://flutter.dev/docs/deployment/ios)
+
 
 ### :memo: Licença
 Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
