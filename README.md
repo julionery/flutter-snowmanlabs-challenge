@@ -42,7 +42,7 @@
 ### :information_source: Como Usar:
 
 Para executar corretamente esta aplicação você precisará:
- - [Git](https://git-scm.com) e [NodeJS](https://nodejs.org/en/) já instalados;
+ - [Git](https://git-scm.com) já instalado;
  - [Ambiente flutter](https://flutter.dev/docs/get-started/install) já configurado;
  - [Criar um projeto Firebase](https://firebase.google.com/docs/projects/learn-more) e [configura-lo ao Flutter](https://firebase.google.com/docs/flutter/setup).
      - A configuração com o Firebase já está quase completa, faltando somente adicionar o arquivo **google-services.json** ao projeto.
